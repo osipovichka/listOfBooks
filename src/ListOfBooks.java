@@ -12,12 +12,13 @@ public class ListOfBooks {
         in.close();
 
         File[] listOfFiles = new File(path).listFiles();
-        List<Book> books = new ArrayList<Book>();
+        List<Book> books = new ArrayList<>();
 
         for (File file : listOfFiles) {
             String fileName = file.getName();
-            if(file.isFile() && (fileName.endsWith(".fb2") || fileName.endsWith(".fb2.zip"))){
-                if(fileName.endsWith(".fb2.zip")){
+
+            if (file.isFile() && (fileName.endsWith(".fb2") || fileName.endsWith(".fb2.zip"))) {
+                if (fileName.endsWith(".fb2.zip")) {
                     books.add(Parse.parse(UnZip.unZip(file.getAbsolutePath(), path)));
                     file.delete();
                 } else {
@@ -28,7 +29,7 @@ public class ListOfBooks {
 
         Collections.sort(books, new BookComparator());
 
-        for (Book book : books){
+        for (Book book : books) {
             System.out.println(book);
         }
     }

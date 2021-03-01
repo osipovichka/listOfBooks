@@ -1,4 +1,3 @@
-
 public class Author implements Comparable<Author> {
     private String firstName;
     private String lastName;
@@ -28,16 +27,15 @@ public class Author implements Comparable<Author> {
         this.middleName = middleName;
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return String.format("%s %s %s", this.lastName, this.firstName, this.middleName);
     }
 
     @Override
     public String toString() {
-        if(middleName == null){
+        if (middleName == null) {
             return String.format("%s %s", this.lastName, this.firstName);
-        }
-        else{
+        } else {
             return String.format("%s %s %s", this.lastName, this.firstName, this.middleName);
         }
     }

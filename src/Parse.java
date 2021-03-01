@@ -10,23 +10,25 @@ import java.io.IOException;
 public class Parse {
     public static Book parse(String file) {
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-
         Book book = null;
         Author author = null;
+
         try(FileInputStream fis = new FileInputStream(file)) {
 
             XMLEventReader reader = xmlInputFactory.createXMLEventReader(fis);
 
             while (reader.hasNext()) {
                 XMLEvent nextEvent = reader.nextEvent();
+
                 if (nextEvent.isStartElement()) {
                     StartElement startElement = nextEvent.asStartElement();
+
                     switch (startElement.getName().getLocalPart()) {
                         case "title-info":
                             book = new Book();
+                            author = new Author();
                             break;
                         case "first-name":
-                            author = new Author();
                             nextEvent = reader.nextEvent();
                             author.setFirstName(nextEvent.asCharacters().getData());
                             break;
@@ -44,8 +46,10 @@ public class Parse {
                             break;
                     }
                 }
+
                 if (nextEvent.isEndElement()) {
                     EndElement endElement = nextEvent.asEndElement();
+
                     if (endElement.getName().getLocalPart().equals("title-info")) {
                         book.setAuthor(author);
                         break;
@@ -55,6 +59,7 @@ public class Parse {
         } catch (IOException | XMLStreamException e) {
             e.printStackTrace();
         }
+
         return book;
     }
 }
