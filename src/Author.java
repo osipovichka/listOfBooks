@@ -28,6 +28,10 @@ public class Author {
         this.middleName = middleName;
     }
 
+    public String getFullName(){
+        return String.format("%s %s %s", this.lastName, this.firstName, this.middleName);
+    }
+
     @Override
     public String toString() {
         if(middleName == null){

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,6 +25,8 @@ public class ListOfBooks {
                 }
             }
         }
+
+        Collections.sort(books, new BookComparator());
 
         for (Book book : books){
             System.out.println(book);
