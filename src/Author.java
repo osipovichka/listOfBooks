@@ -1,5 +1,5 @@
 
-public class Author {
+public class Author implements Comparable<Author> {
     private String firstName;
     private String lastName;
     private String middleName;
@@ -42,4 +42,8 @@ public class Author {
         }
     }
 
+    @Override
+    public int compareTo(Author author) {
+        return this.getFullName().compareTo(author.getFullName());
+    }
 }
